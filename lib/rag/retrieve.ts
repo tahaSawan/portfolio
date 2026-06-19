@@ -1,6 +1,8 @@
 import { buildKnowledgeChunks } from "@/lib/rag/chunks";
 import { MIN_RELEVANCE_SCORE, TOP_K } from "@/lib/rag/config";
 import { keywordBoost } from "@/lib/rag/math";
+import { projectSlugFromChunkId } from "@/lib/rag/projectSlug";
+import { expandRetrievalQuery } from "@/lib/rag/queryExpand";
 import type { KnowledgeChunk, RetrievedChunk } from "@/lib/rag/types";
 
 const STOP_WORDS = new Set([
@@ -59,11 +61,14 @@ function scoreChunk(query: string, chunk: KnowledgeChunk): number {
     if (corpus.includes(term)) score += 0.12;
   }
 
-  const slugMatch = chunk.id.match(/^project-([^-]+)/);
+  const slugMatch = projectSlugFromChunkId(chunk.id);
   if (slugMatch) {
-    const slug = slugMatch[1]!;
+    const slug = slugMatch;
     for (const term of queryTerms) {
       if (slug.includes(term) || term.includes(slug)) score += 0.55;
+      if (slug.split("-").some((part) => part.length >= 4 && part.includes(term))) {
+        score += 0.25;
+      }
     }
   }
 
@@ -90,9 +95,17 @@ function fallbackChunks(chunks: KnowledgeChunk[]): RetrievedChunk[] {
 
 /** Lexical retrieval — no embedding API required (Groq is chat-only). */
 export function retrieveRelevantChunks(
-  query: string,
-  topK = TOP_K,
+  userQuery: string,
+  options?: {
+    topK?: number;
+    conversation?: { role: string; content: string }[];
+  },
 ): RetrievedChunk[] {
+  const topK = options?.topK ?? TOP_K;
+  const query = options?.conversation?.length
+    ? expandRetrievalQuery(userQuery, options.conversation)
+    : userQuery;
+
   const chunks = getChunks();
 
   const scored = chunks

@@ -6,6 +6,7 @@ import {
 } from "@/lib/rag/config";
 import { getGroqClient, isAssistantConfigured } from "@/lib/rag/groqClient";
 import { buildSystemPrompt } from "@/lib/rag/prompt";
+import { suggestFollowUps } from "@/lib/rag/followUps";
 import { checkRateLimit, clientIp } from "@/lib/rag/rateLimit";
 import { retrieveRelevantChunks } from "@/lib/rag/retrieve";
 import type { AssistantSource, ClientChatMessage } from "@/lib/rag/types";
@@ -15,6 +16,7 @@ export const dynamic = "force-dynamic";
 
 type StreamEvent =
   | { type: "sources"; sources: AssistantSource[] }
+  | { type: "followups"; items: string[] }
   | { type: "token"; content: string }
   | { type: "done" }
   | { type: "error"; message: string };
@@ -113,7 +115,9 @@ export async function POST(request: Request) {
       };
 
       try {
-        const retrieved = retrieveRelevantChunks(userQuery);
+        const retrieved = retrieveRelevantChunks(userQuery, {
+          conversation: messages,
+        });
 
         const sources: AssistantSource[] = retrieved.map((chunk) => ({
           id: chunk.id,
@@ -123,6 +127,10 @@ export async function POST(request: Request) {
         }));
 
         push({ type: "sources", sources });
+        push({
+          type: "followups",
+          items: suggestFollowUps(sources, userQuery),
+        });
 
         const groq = getGroqClient();
 

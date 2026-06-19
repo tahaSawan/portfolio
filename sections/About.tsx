@@ -28,10 +28,18 @@ export async function About() {
           "grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,17.5rem)] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,1.12fr)_minmax(0,19rem)] xl:gap-14",
         )}
       >
+        <div className="order-2 min-w-0 space-y-5 sm:space-y-7 md:space-y-8 lg:order-1">
+          {site.aboutParagraphs.map((paragraph, index) => (
+            <p key={paragraph} className={index === 0 ? proseLead : proseBody}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
         {photoSrc ? (
           <figure
             className={cn(
-              "order-first mx-auto w-full max-w-[14rem] shrink-0 sm:max-w-[17.5rem] lg:order-none lg:mx-0 lg:max-w-none",
+              "order-1 mx-auto w-full max-w-[12rem] shrink-0 sm:max-w-[14rem] lg:order-2 lg:mx-0 lg:max-w-none",
               "lg:justify-self-end",
             )}
           >
@@ -41,21 +49,13 @@ export async function About() {
                 alt={`Portrait of ${site.name}`}
                 fill
                 className="object-cover object-[center_15%]"
-                sizes="(min-width: 1024px) 304px, (min-width: 640px) 280px, 100vw"
+                sizes="(min-width: 1280px) 304px, (min-width: 1024px) 280px, (min-width: 640px) 224px, 192px"
                 priority
                 unoptimized
               />
             </div>
           </figure>
         ) : null}
-
-        <div className="min-w-0 space-y-5 sm:space-y-7 md:space-y-8">
-          {site.aboutParagraphs.map((paragraph, index) => (
-            <p key={paragraph} className={index === 0 ? proseLead : proseBody}>
-              {paragraph}
-            </p>
-          ))}
-        </div>
       </div>
     </div>
   );

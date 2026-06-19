@@ -2,6 +2,11 @@
 
 import Link from "next/link";
 import {
+  BuddyMascot,
+  LightbulbMascot,
+  PeekSpeechBubble,
+} from "@/components/AssistantMascot";
+import {
   useCallback,
   useEffect,
   useId,
@@ -23,38 +28,22 @@ type UiMessage = {
   role: ChatRole;
   content: string;
   sources?: AssistantSource[];
+  followUps?: string[];
   streaming?: boolean;
 };
 
 const SUGGESTED_PROMPTS = [
   "What projects has Taha built?",
-  "What's his experience with AI and ML?",
+  "What's his AI & ML experience?",
   "Tell me about PrepXpert",
-  "How can I contact him?",
+  "How can I hire him?",
 ] as const;
+
+const PEEK_LINE =
+  "Ask me about projects, skills, or how to reach Taha — I only answer from this portfolio.";
 
 function createId(): string {
   return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-}
-
-function AssistantIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <path d="M12 3a7 7 0 0 0-4 12.5V19a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3.5A7 7 0 0 0 12 3Z" />
-      <path d="M9.5 22h5" />
-      <path d="M10 10.5h.01M14 10.5h.01" />
-      <path d="M10 14.5a2.5 2.5 0 0 0 4 0" />
-    </svg>
-  );
 }
 
 function CloseIcon({ className }: { className?: string }) {
@@ -91,7 +80,7 @@ function SendIcon({ className }: { className?: string }) {
 }
 
 function renderInlineMarkdown(text: string): ReactNode[] {
-  const nodes: React.ReactNode[] = [];
+  const nodes: ReactNode[] = [];
   const pattern =
     /(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s)]+)/g;
   let lastIndex = 0;
@@ -106,7 +95,10 @@ function renderInlineMarkdown(text: string): ReactNode[] {
 
     if (token.startsWith("**") && token.endsWith("**")) {
       nodes.push(
-        <strong key={`${match.index}-b`} className="font-semibold text-foreground">
+        <strong
+          key={`${match.index}-b`}
+          className="font-semibold text-foreground"
+        >
           {token.slice(2, -2)}
         </strong>,
       );
@@ -169,7 +161,7 @@ function MessageBody({ content }: { content: string }) {
   const paragraphs = content.split(/\n{2,}/);
 
   return (
-    <div className="space-y-2.5 text-[14px] leading-relaxed text-muted-foreground">
+    <div className="space-y-2.5 text-[14px] leading-relaxed text-foreground-secondary">
       {paragraphs.map((paragraph, i) => {
         const lines = paragraph.split("\n");
         const isList = lines.every((line) => /^[-*•]\s/.test(line.trim()));
@@ -178,7 +170,9 @@ function MessageBody({ content }: { content: string }) {
           return (
             <ul key={i} className="list-disc space-y-1 pl-4">
               {lines.map((line) => (
-                <li key={line}>{renderInlineMarkdown(line.replace(/^[-*•]\s*/, ""))}</li>
+                <li key={line}>
+                  {renderInlineMarkdown(line.replace(/^[-*•]\s*/, ""))}
+                </li>
               ))}
             </ul>
           );
@@ -210,10 +204,11 @@ function SourcePills({ sources }: { sources: AssistantSource[] }) {
 
   return (
     <div className="mt-3 flex flex-wrap gap-1.5">
+      <span className="sr-only">Sources:</span>
       {unique.map((source) => {
-        const label = source.section;
+        const label = source.title;
         const className = cn(
-          "inline-flex max-w-full items-center rounded-full border border-accent/22 bg-accent/[0.06] px-2.5 py-1 text-[11px] font-medium text-accent",
+          "inline-flex max-w-full items-center rounded-full border border-accent/22 bg-accent/[0.06] px-2.5 py-1 text-[10px] font-medium text-accent",
           btnTransition,
           "hover:border-accent/40 hover:bg-accent/[0.1]",
           focusRing,
@@ -247,6 +242,39 @@ function SourcePills({ sources }: { sources: AssistantSource[] }) {
           </span>
         );
       })}
+    </div>
+  );
+}
+
+function FollowUpChips({
+  items,
+  disabled,
+  onSelect,
+}: {
+  items: string[];
+  disabled: boolean;
+  onSelect: (text: string) => void;
+}) {
+  if (items.length === 0) return null;
+
+  return (
+    <div className="mt-3 flex flex-wrap gap-1.5">
+      {items.map((item) => (
+        <button
+          key={item}
+          type="button"
+          disabled={disabled}
+          onClick={() => onSelect(item)}
+          className={cn(
+            "rounded-full border border-accent/20 bg-accent/[0.05] px-2.5 py-1.5 text-left text-[11px] font-medium leading-snug text-muted-foreground",
+            btnTransition,
+            "hover:border-accent/38 hover:bg-accent/[0.1] hover:text-foreground-secondary",
+            focusRing,
+          )}
+        >
+          {item}
+        </button>
+      ))}
     </div>
   );
 }
@@ -365,6 +393,7 @@ export function PortfolioAssistant() {
         const decoder = new TextDecoder();
         let buffer = "";
         let sources: AssistantSource[] = [];
+        let followUps: string[] = [];
 
         while (true) {
           const { done, value } = await reader.read();
@@ -381,11 +410,14 @@ export function PortfolioAssistant() {
               type: string;
               content?: string;
               sources?: AssistantSource[];
+              items?: string[];
               message?: string;
             };
 
             if (event.type === "sources" && event.sources) {
               sources = event.sources;
+            } else if (event.type === "followups" && event.items) {
+              followUps = event.items;
             } else if (event.type === "token" && event.content) {
               setMessages((prev) =>
                 prev.map((m) =>
@@ -407,6 +439,7 @@ export function PortfolioAssistant() {
                   ...m,
                   streaming: false,
                   sources,
+                  followUps,
                 }
               : m,
           ),
@@ -455,61 +488,76 @@ export function PortfolioAssistant() {
     setLoading(false);
   }, []);
 
+  const firstName = site.name.split(" ")[0];
+
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
+      {/* FAB + peek bubble */}
+      <div
         className={cn(
-          "fixed z-[60] flex h-14 w-14 touch-manipulation items-center justify-center rounded-full border border-accent/40 bg-matte-deep text-accent shadow-[0_8px_32px_rgba(0,0,0,0.35)]",
+          "group fixed z-[60]",
           "bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))]",
-          btnTransition,
-          "hover:border-accent/60 hover:bg-matte-hover hover:text-accent-hover",
-          open && "pointer-events-none scale-95 opacity-0",
-          focusRing,
+          open && "pointer-events-none opacity-0",
+          "transition-opacity duration-200",
         )}
-        aria-expanded={open}
-        aria-controls={panelId}
-        aria-label="Open portfolio assistant"
       >
-        <span
-          className="pointer-events-none absolute inset-0 rounded-full bg-accent/10 blur-md"
-          aria-hidden
-        />
-        <AssistantIcon className="relative h-6 w-6" />
-      </button>
+        <PeekSpeechBubble text={PEEK_LINE} />
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className={cn(
+            "relative flex h-[3.75rem] w-[3.75rem] touch-manipulation items-center justify-center rounded-full",
+            "border border-accent/35 bg-matte-deep text-accent shadow-[0_10px_40px_rgba(0,0,0,0.4)]",
+            btnTransition,
+            "hover:border-accent/55 hover:shadow-[0_12px_44px_rgba(45,212,191,0.15)]",
+            focusRing,
+          )}
+          aria-expanded={open}
+          aria-controls={panelId}
+          aria-label="Open Lumo portfolio assistant"
+        >
+          <LightbulbMascot className="h-8 w-8" glow animate />
+        </button>
+      </div>
 
       {open ? (
         <button
           type="button"
-          className="fixed inset-0 z-[55] cursor-default border-0 bg-black/45 p-0 backdrop-blur-[2px] motion-reduce:backdrop-blur-none md:bg-black/35"
+          className="fixed inset-0 z-[55] cursor-default border-0 bg-black/50 p-0 backdrop-blur-sm motion-reduce:backdrop-blur-none"
           aria-label="Close assistant"
           onClick={() => setOpen(false)}
         />
       ) : null}
 
+      {/* Chat panel */}
       <section
         id={panelId}
         role="dialog"
         aria-modal="true"
-        aria-label="Portfolio assistant"
+        aria-label="Lumo portfolio assistant"
         className={cn(
-          "fixed z-[60] flex flex-col overflow-hidden border border-border-muted/90 bg-page shadow-[0_24px_80px_rgba(0,0,0,0.45)]",
-          "inset-x-0 bottom-0 max-h-[min(88dvh,42rem)] rounded-t-2xl",
-          "md:inset-x-auto md:bottom-[max(1.25rem,env(safe-area-inset-bottom))] md:right-[max(1.25rem,env(safe-area-inset-right))] md:max-h-[min(34rem,78dvh)] md:w-[min(100vw-2rem,24rem)] md:rounded-2xl",
+          "assistant-glass fixed z-[60] flex flex-col overflow-hidden",
+          "inset-x-0 bottom-0 max-h-[min(90dvh,44rem)] rounded-t-[1.35rem]",
+          "md:inset-x-auto md:bottom-[max(1.25rem,env(safe-area-inset-bottom))] md:right-[max(1.25rem,env(safe-area-inset-right))] md:max-h-[min(36rem,82dvh)] md:w-[min(100vw-2rem,26rem)] md:rounded-[1.35rem]",
           "transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none",
           open
             ? "translate-y-0 opacity-100"
-            : "pointer-events-none translate-y-4 opacity-0",
+            : "pointer-events-none translate-y-6 opacity-0",
         )}
       >
-        <header className="flex shrink-0 items-start justify-between gap-3 border-b border-border-muted/80 px-4 py-3.5 sm:px-5">
-          <div className="min-w-0 text-left">
+        <div
+          className="assistant-panel-grid pointer-events-none absolute inset-0 opacity-40"
+          aria-hidden
+        />
+
+        <header className="relative flex shrink-0 items-center gap-3 border-b border-border-muted/70 px-4 py-3.5 sm:px-5">
+          <BuddyMascot className="h-11 w-11" thinking={loading} />
+          <div className="min-w-0 flex-1 text-left">
             <p className="text-sm font-semibold tracking-tight text-foreground">
-              Ask about {site.name.split(" ")[0]}
+              Lumo
             </p>
-            <p className="mt-0.5 text-[12px] leading-snug text-muted-foreground">
-              Grounded in this portfolio — projects, skills, and contact info.
+            <p className="text-[11px] leading-snug text-muted-foreground">
+              Guide to {firstName}&apos;s portfolio
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1">
@@ -545,13 +593,16 @@ export function PortfolioAssistant() {
 
         <div
           ref={listRef}
-          className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:px-5"
+          className="relative min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:px-5"
         >
           {messages.length === 0 ? (
-            <div className="text-left">
-              <p className="text-[13px] leading-relaxed text-muted-foreground">
-                Ask about projects, AI/ML experience, education, or how to get in
-                touch. I only answer from content on this site.
+            <div className="assistant-glass rounded-2xl px-4 py-3.5 text-left">
+              <p className="text-[13px] font-medium leading-relaxed text-foreground-secondary">
+                Hey — I&apos;m Lumo. Ask about {firstName}&apos;s projects, AI
+                work, education, or the best way to get in touch.
+              </p>
+              <p className="mt-2 text-[12px] leading-relaxed text-muted-foreground">
+                I only answer from content on this site — no guessing.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {SUGGESTED_PROMPTS.map((prompt) => (
@@ -561,9 +612,9 @@ export function PortfolioAssistant() {
                     disabled={loading}
                     onClick={() => void sendMessage(prompt)}
                     className={cn(
-                      "rounded-full border border-accent/24 bg-surface-input px-3 py-2 text-left text-[12px] font-medium leading-snug text-foreground-secondary",
+                      "rounded-full border border-accent/24 bg-accent/[0.06] px-3 py-2 text-left text-[12px] font-medium leading-snug text-foreground-secondary",
                       btnTransition,
-                      "hover:border-accent/40 hover:bg-accent/[0.08]",
+                      "hover:border-accent/42 hover:bg-accent/[0.12]",
                       focusRing,
                     )}
                   >
@@ -578,36 +629,59 @@ export function PortfolioAssistant() {
             <div
               key={message.id}
               className={cn(
-                "flex",
+                "flex gap-2",
                 message.role === "user" ? "justify-end" : "justify-start",
               )}
             >
+              {message.role === "assistant" ? (
+                <BuddyMascot
+                  className="mt-1 h-8 w-8 opacity-90"
+                  thinking={Boolean(message.streaming)}
+                />
+              ) : null}
+
               <div
                 className={cn(
-                  "max-w-[92%] rounded-2xl px-3.5 py-3 text-left sm:max-w-[88%]",
-                  message.role === "user"
-                    ? "rounded-br-md bg-accent text-on-accent"
-                    : "rounded-bl-md border border-border-muted/80 bg-card",
+                  "max-w-[min(92%,18.5rem)] text-left sm:max-w-[85%]",
+                  message.role === "user" ? "sm:max-w-[80%]" : "",
                 )}
               >
-                {message.role === "user" ? (
-                  <p className="text-[14px] leading-relaxed">{message.content}</p>
-                ) : (
-                  <>
-                    {message.content ? (
-                      <MessageBody content={message.content} />
-                    ) : message.streaming ? (
-                      <div className="flex items-center gap-1.5 py-1" aria-hidden>
-                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent/70" />
-                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent/70 [animation-delay:120ms]" />
-                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent/70 [animation-delay:240ms]" />
-                      </div>
-                    ) : null}
-                    {message.sources && !message.streaming ? (
-                      <SourcePills sources={message.sources} />
-                    ) : null}
-                  </>
-                )}
+                <div
+                  className={cn(
+                    "rounded-2xl px-3.5 py-3",
+                    message.role === "user"
+                      ? "rounded-br-md bg-accent text-on-accent"
+                      : "assistant-glass rounded-bl-md",
+                  )}
+                >
+                  {message.role === "user" ? (
+                    <p className="text-[14px] leading-relaxed">
+                      {message.content}
+                    </p>
+                  ) : message.content ? (
+                    <MessageBody content={message.content} />
+                  ) : message.streaming ? (
+                    <p className="text-[13px] text-muted-foreground">
+                      Thinking…
+                    </p>
+                  ) : null}
+                </div>
+
+                {message.role === "assistant" &&
+                message.sources &&
+                !message.streaming ? (
+                  <SourcePills sources={message.sources} />
+                ) : null}
+
+                {message.role === "assistant" &&
+                message.followUps &&
+                !message.streaming ? (
+                  <FollowUpChips
+                    items={message.followUps}
+                    disabled={loading}
+                    onSelect={(text) => void sendMessage(text)}
+                  />
+                ) : null}
               </div>
             </div>
           ))}
@@ -615,7 +689,7 @@ export function PortfolioAssistant() {
 
         {error ? (
           <p
-            className="shrink-0 px-4 pb-2 text-left text-[12px] text-muted-foreground sm:px-5"
+            className="relative shrink-0 px-4 pb-2 text-left text-[12px] text-muted-foreground sm:px-5"
             role="alert"
           >
             {error}
@@ -624,7 +698,7 @@ export function PortfolioAssistant() {
 
         <form
           onSubmit={onSubmit}
-          className="shrink-0 border-t border-border-muted/80 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4"
+          className="relative shrink-0 border-t border-border-muted/70 p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:p-4"
         >
           <div className="flex items-end gap-2">
             <label htmlFor={inputId} className="sr-only">
@@ -638,9 +712,9 @@ export function PortfolioAssistant() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               disabled={loading}
-              placeholder="Ask a question…"
+              placeholder={`Ask about ${firstName}…`}
               className={cn(
-                "max-h-28 min-h-11 flex-1 resize-none rounded-xl border border-border-muted/90 bg-surface-input px-3.5 py-2.5 text-[14px] leading-relaxed text-foreground-secondary placeholder:text-faint-foreground",
+                "max-h-28 min-h-11 flex-1 resize-none rounded-xl border border-border-muted/80 bg-surface-input/80 px-3.5 py-2.5 text-[14px] leading-relaxed text-foreground-secondary placeholder:text-faint-foreground backdrop-blur-sm",
                 btnTransition,
                 "focus:border-accent/45 focus:outline focus:outline-1 focus:outline-offset-2 focus:outline-accent",
               )}
@@ -649,7 +723,7 @@ export function PortfolioAssistant() {
               type="submit"
               disabled={loading || !input.trim()}
               className={cn(
-                "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent text-on-accent",
+                "inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent/40 bg-accent text-on-accent shadow-[0_0_20px_rgba(45,212,191,0.2)]",
                 btnTransition,
                 "hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40",
                 focusRing,
@@ -659,9 +733,6 @@ export function PortfolioAssistant() {
               <SendIcon className="h-4 w-4" />
             </button>
           </div>
-          <p className="mt-2 text-left text-[10px] leading-relaxed text-faint-foreground">
-            AI assistant · answers from portfolio content only
-          </p>
         </form>
       </section>
     </>

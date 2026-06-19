@@ -117,7 +117,7 @@ export function buildKnowledgeChunks(): KnowledgeChunk[] {
           project.liveDemoUrl
             ? `Live site: ${project.liveDemoUrl} (${project.liveDemoLabel ?? "Live demo"}).`
             : null,
-          `GitHub: ${project.githubUrl}.`,
+          project.githubUrl ? `GitHub: ${project.githubUrl}.` : null,
         ]
           .filter(Boolean)
           .join(" "),

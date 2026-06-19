@@ -323,7 +323,14 @@ export function ProjectCaseStudy({ project, index }: ProjectCaseStudyProps) {
               "grid list-none gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6",
             )}
           >
-            {Array.from({ length: SCREENSHOT_SLOTS }, (_, i) => {
+            {Array.from(
+              {
+                length: Math.max(
+                  SCREENSHOT_SLOTS,
+                  shots.length > 0 ? shots.length : SCREENSHOT_SLOTS,
+                ),
+              },
+              (_, i) => {
               const s = shots[i];
               if (s) {
                 return (
@@ -374,20 +381,23 @@ export function ProjectCaseStudy({ project, index }: ProjectCaseStudyProps) {
           </div>
         </section>
 
+        {(githubUrl || liveDemoUrl) ? (
         <footer
           className={cn(
             caseStudySectionTop,
             "flex flex-col gap-3.5 sm:flex-row sm:flex-wrap sm:items-stretch sm:gap-3",
           )}
         >
-          <a
-            href={githubUrl}
-            className={buttonCompact}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            GitHub
-          </a>
+          {githubUrl ? (
+            <a
+              href={githubUrl}
+              className={buttonCompact}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              GitHub
+            </a>
+          ) : null}
           {liveDemoUrl ? (
             <a
               href={liveDemoUrl}
@@ -399,6 +409,7 @@ export function ProjectCaseStudy({ project, index }: ProjectCaseStudyProps) {
             </a>
           ) : null}
         </footer>
+        ) : null}
       </div>
     </article>
   );

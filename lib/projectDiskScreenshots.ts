@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { ProjectCaseStudy, ProjectScreenshot } from "@/lib/caseStudies";
-import { listProjectSlugs } from "@/lib/caseStudies";
+import { getProjectBySlug, listProjectSlugs } from "@/lib/caseStudies";
 
 const IMAGE_EXT = new Set([
   ".png",
@@ -20,9 +20,20 @@ function isSafeBasename(name: string): boolean {
 
 const imagesRoot = () => path.join(process.cwd(), "images");
 
+const MAX_DISK_SCREENSHOTS = 10;
+
+function resolveDirName(slug: string): string[] {
+  const project = getProjectBySlug(slug);
+  const names = new Set<string>();
+  if (project?.imagesFolder?.trim()) {
+    names.add(project.imagesFolder.trim());
+  }
+  names.add(slug);
+  return [...names];
+}
+
 /**
- * Absolute path to `images/<slug>/`, matching folder name case-insensitively
- * (e.g. `LegalConnect` on disk for slug `legalconnect`).
+ * Absolute path to `images/<folder>/`, matching folder name case-insensitively.
  */
 export function resolveProjectImagesDir(slug: string): string | null {
   const allowed = new Set(listProjectSlugs());
@@ -31,24 +42,28 @@ export function resolveProjectImagesDir(slug: string): string | null {
   const root = imagesRoot();
   if (!fs.existsSync(root) || !fs.statSync(root).isDirectory()) return null;
 
-  const exact = path.join(root, slug);
-  if (fs.existsSync(exact) && fs.statSync(exact).isDirectory()) {
-    return exact;
+  for (const candidate of resolveDirName(slug)) {
+    const exact = path.join(root, candidate);
+    if (fs.existsSync(exact) && fs.statSync(exact).isDirectory()) {
+      return exact;
+    }
+
+    const match = fs.readdirSync(root).find((name) => {
+      const full = path.join(root, name);
+      try {
+        return (
+          fs.statSync(full).isDirectory() &&
+          name.toLowerCase() === candidate.toLowerCase()
+        );
+      } catch {
+        return false;
+      }
+    });
+
+    if (match) return path.join(root, match);
   }
 
-  const match = fs.readdirSync(root).find((name) => {
-    const full = path.join(root, name);
-    try {
-      return (
-        fs.statSync(full).isDirectory() &&
-        name.toLowerCase() === slug.toLowerCase()
-      );
-    } catch {
-      return false;
-    }
-  });
-
-  return match ? path.join(root, match) : null;
+  return null;
 }
 
 /** Sorted image basenames under the resolved `images/<slug>/` folder. */
@@ -87,9 +102,9 @@ export function diskScreenshotsForProject(
 ): readonly ProjectScreenshot[] | undefined {
   const files = listDiskScreenshotFilenames(slug, preferStem);
   if (files.length === 0) return undefined;
-  return files.slice(0, 3).map((file) => ({
+  return files.slice(0, MAX_DISK_SCREENSHOTS).map((file) => ({
     src: `/api/case-study-assets/${slug}/${encodeURIComponent(file)}`,
-    alt: `${title} — product screenshot`,
+    alt: `${title} — analysis chart`,
   }));
 }
 

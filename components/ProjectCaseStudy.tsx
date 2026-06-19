@@ -113,16 +113,16 @@ export function ProjectCaseStudy({ project, index }: ProjectCaseStudyProps) {
     <article
       id={`project-${slug}`}
       className={cn(
-        "scroll-mt-24 sm:scroll-mt-28",
+        "scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-28",
         "rounded-lg border border-border-muted bg-card",
         "shadow-[inset_0_1px_0_0_rgba(255,255,255,0.03)]",
         cardSurfaceTransition,
-        "p-6 sm:p-8 lg:p-12 xl:p-14",
+        "p-4 sm:p-6 md:p-8 lg:p-12 xl:p-14",
         "hover:border-accent/32 hover:bg-card-hover",
         "motion-safe:hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
       )}
     >
-      <header className="border-b border-border-muted/80 pb-8 sm:pb-10 md:pb-11">
+      <header className="border-b border-border-muted/80 pb-6 sm:pb-8 md:pb-10">
         <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent/60 sm:text-[11px]">
           Case study · {String(index).padStart(2, "0")}
         </p>
@@ -131,7 +131,7 @@ export function ProjectCaseStudy({ project, index }: ProjectCaseStudyProps) {
         </h3>
       </header>
 
-      <div className="mt-9 space-y-11 sm:mt-10 sm:space-y-12 md:mt-11 md:space-y-14">
+      <div className="mt-7 space-y-9 sm:mt-9 sm:space-y-11 md:mt-10 md:space-y-12 lg:space-y-14">
         {/* Overview */}
         <section aria-labelledby={`${slug}-overview-h`}>
           <h4 id={`${slug}-overview-h`} className={labelOverline}>

@@ -20,14 +20,14 @@ export const subsectionTitle = cn(
 );
 
 /** Space from section title to first content block */
-export const afterSectionHeading = "mt-7 sm:mt-9 md:mt-10";
+export const afterSectionHeading = "mt-5 sm:mt-7 md:mt-9 lg:mt-10";
 
 /** Space from in-card label (case studies, dense stacks) to body */
 export const afterCardLabel = "mt-4 sm:mt-5";
 
 /** Top rule + padding between major blocks inside a case-study card */
 export const caseStudySectionTop = cn(
-  "border-t border-border-muted/75 pt-9 sm:pt-10 md:pt-11",
+  "border-t border-border-muted/75 pt-7 sm:pt-9 md:pt-11",
 );
 
 /** Overline labels (contact fields, form labels) */
@@ -60,9 +60,17 @@ export const transitionLink =
 
 /** Skill / stack chips — shared surface */
 export const chipMatte = cn(
-  "inline-flex min-h-9 touch-manipulation items-center rounded-md border border-accent/24 bg-surface-input px-2.5 py-1.5 text-[12px] font-medium leading-tight tracking-wide text-muted-foreground sm:min-h-0",
+  "inline-flex min-h-9 touch-manipulation items-center rounded-md border border-accent/24 bg-surface-input px-2.5 py-1.5 text-[12px] font-medium leading-tight tracking-wide text-muted-foreground",
   transitionLink,
   "hover:border-accent/40 hover:bg-accent/[0.08] hover:text-foreground-secondary",
+);
+
+/** Inline text links with a comfortable tap area on touch devices */
+export const touchTextLink = cn(
+  "inline-flex min-h-11 touch-manipulation items-center py-2",
+  transitionLink,
+  focusRing,
+  "rounded-sm",
 );
 
 /** Form fields — border and surface only */

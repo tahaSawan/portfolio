@@ -18,7 +18,7 @@ const asideBody =
   "I am interested in internships, research collaboration, and project-based work across AI, machine learning, and full-stack engineering.";
 
 const cardShell = cn(
-  "rounded-xl border border-border-muted/85 bg-card p-6 sm:p-8",
+  "rounded-xl border border-border-muted/85 bg-card p-4 sm:p-6 md:p-8",
   "shadow-[0_1px_0_rgba(255,255,255,0.04)_inset]",
 );
 
@@ -31,7 +31,7 @@ const infoValue =
   "mt-0.5 text-sm font-semibold text-foreground sm:text-[15px]";
 
 const connectSocialBox = cn(
-  "inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-muted/80 text-muted-foreground",
+  "inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-md border border-border-muted/80 text-muted-foreground",
   "transition-[border-color,color] duration-200 ease-out hover:border-accent/35 hover:text-accent-hover",
   focusRing,
 );

@@ -58,7 +58,7 @@ const desktopNavLinkBase = cn(
 const desktopNavLinkActive = cn("text-accent");
 
 const iconLink = cn(
-  "inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-muted/70 text-muted-foreground",
+  "inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-border-muted/70 text-muted-foreground",
   btnTransition,
   "hover:border-accent/35 hover:text-accent-hover",
   focusRing,
@@ -174,10 +174,11 @@ export function Navbar() {
         ref={headerRef}
         className={cn(
           "sticky top-0 z-50 w-full overflow-hidden border-b",
+          "pt-[env(safe-area-inset-top)]",
           navShellTransition,
           scrolled
-            ? "border-border-muted bg-page/92 backdrop-blur-lg supports-[backdrop-filter]:bg-page/86"
-            : "border-border-muted/80 bg-page/84 backdrop-blur-md supports-[backdrop-filter]:bg-page/76",
+            ? "border-border-muted bg-page/95 max-md:backdrop-blur-sm md:bg-page/92 md:backdrop-blur-lg supports-[backdrop-filter]:max-md:bg-page/94 supports-[backdrop-filter]:md:bg-page/86"
+            : "border-border-muted/80 bg-page/90 max-md:backdrop-blur-none md:bg-page/84 md:backdrop-blur-md supports-[backdrop-filter]:max-md:bg-page/92 supports-[backdrop-filter]:md:bg-page/76",
         )}
       >
         {/* Subtle teal arc / wash — reference-style depth */}
@@ -304,7 +305,7 @@ export function Navbar() {
             "border-t border-border-muted/70 md:hidden",
             "transition-[border-color,background-color] duration-200 ease-out",
             menuOpen
-              ? "block bg-page/95 backdrop-blur-md supports-[backdrop-filter]:bg-page/88"
+              ? "block bg-page/97 max-md:backdrop-blur-sm supports-[backdrop-filter]:max-md:bg-page/94 md:bg-page/95 md:backdrop-blur-md supports-[backdrop-filter]:md:bg-page/88"
               : "hidden",
           )}
         >
@@ -342,7 +343,7 @@ export function Navbar() {
                 <Link
                   href="/#contact"
                 className={cn(
-                  "flex w-full items-center justify-center rounded-full bg-accent py-2.5 text-[13px] font-semibold text-on-accent",
+                  "flex min-h-11 w-full items-center justify-center rounded-full bg-accent py-3 text-[13px] font-semibold text-on-accent",
                   btnTransition,
                   "hover:opacity-90",
                   focusRing,

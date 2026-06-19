@@ -25,21 +25,13 @@ export async function About() {
       <div
         className={cn(
           afterSectionHeading,
-          "grid gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,17.5rem)] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,1.12fr)_minmax(0,19rem)] xl:gap-14",
+          "grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.12fr)_minmax(0,17.5rem)] lg:items-start lg:gap-12 xl:grid-cols-[minmax(0,1.12fr)_minmax(0,19rem)] xl:gap-14",
         )}
       >
-        <div className="min-w-0 space-y-6 sm:space-y-7 md:space-y-8">
-          {site.aboutParagraphs.map((paragraph, index) => (
-            <p key={paragraph} className={index === 0 ? proseLead : proseBody}>
-              {paragraph}
-            </p>
-          ))}
-        </div>
-
         {photoSrc ? (
           <figure
             className={cn(
-              "mx-auto w-full max-w-[17.5rem] shrink-0 lg:mx-0 lg:max-w-none",
+              "order-first mx-auto w-full max-w-[14rem] shrink-0 sm:max-w-[17.5rem] lg:order-none lg:mx-0 lg:max-w-none",
               "lg:justify-self-end",
             )}
           >
@@ -56,6 +48,14 @@ export async function About() {
             </div>
           </figure>
         ) : null}
+
+        <div className="min-w-0 space-y-5 sm:space-y-7 md:space-y-8">
+          {site.aboutParagraphs.map((paragraph, index) => (
+            <p key={paragraph} className={index === 0 ? proseLead : proseBody}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );

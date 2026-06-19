@@ -10,14 +10,11 @@ import {
 } from "@/lib/caseStudies";
 import { withDiskScreenshots } from "@/lib/projectDiskScreenshots";
 import { cn } from "@/lib/cn";
-import { btnTransition, focusRing } from "@/lib/ui";
+import { touchTextLink } from "@/lib/ui";
 
 const backLinkClass = cn(
-  "mb-8 inline-flex text-[13px] font-semibold text-accent transition-colors duration-200 ease-out",
-  "hover:text-accent-hover",
-  btnTransition,
-  focusRing,
-  "rounded-sm",
+  touchTextLink,
+  "mb-6 sm:mb-8 text-[13px] font-semibold text-accent hover:text-accent-hover",
 );
 
 type PageProps = {
@@ -51,15 +48,17 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const index = caseStudies.findIndex((p) => p.slug === slug) + 1;
 
   return (
-    <main className="pb-28 sm:pb-36 md:pb-40">
-      <section className="relative scroll-mt-24 overflow-hidden border-b border-border-muted/85 py-10 sm:scroll-mt-28 sm:py-14 lg:py-16">
-        <CircuitGlowLines
-          instanceId={`project-${slug}`}
-          pathSet="section-a"
-          variant="section"
-          showScan={false}
-          showVignette={false}
-        />
+    <main className="pb-20 sm:pb-36 md:pb-40">
+      <section className="relative scroll-mt-20 overflow-hidden border-b border-border-muted/85 py-8 sm:scroll-mt-24 sm:py-12 md:scroll-mt-28 md:py-14 lg:py-16">
+        <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
+          <CircuitGlowLines
+            instanceId={`project-${slug}`}
+            pathSet="section-a"
+            variant="section"
+            showScan={false}
+            showVignette={false}
+          />
+        </div>
         <div className="relative z-10">
           <Link href="/projects" className={backLinkClass}>
             ← All projects

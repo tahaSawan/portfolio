@@ -66,6 +66,7 @@ export function CircuitGlowLines({
     <div
       className={cn(
         "circuit-glow pointer-events-none absolute inset-0 overflow-hidden",
+        variant === "hero" && "circuit-glow--hero",
         styles.opacity,
         className,
       )}

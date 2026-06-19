@@ -2,14 +2,12 @@ import Link from "next/link";
 import type { ProjectCaseStudy } from "@/lib/caseStudies";
 import { site } from "@/lib/site";
 import { ProjectPreviewCard } from "@/components/ProjectPreviewCard";
-import { afterSectionHeading, focusRing, sectionHeading } from "@/lib/ui";
+import { afterSectionHeading, sectionHeading, touchTextLink } from "@/lib/ui";
 import { cn } from "@/lib/cn";
 
 const viewAllClass = cn(
-  "inline-flex shrink-0 items-center text-[13px] font-semibold text-accent transition-colors duration-200 ease-out",
-  "hover:text-accent-hover",
-  focusRing,
-  "rounded-sm",
+  touchTextLink,
+  "shrink-0 text-[13px] font-semibold text-accent hover:text-accent-hover",
 );
 
 type ProjectsProps = {

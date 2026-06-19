@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
-import { focusRing } from "@/lib/ui";
+import { focusRing, touchTextLink } from "@/lib/ui";
 import {
   BrandBoltIcon,
   GitHubIcon,
@@ -12,14 +12,12 @@ import {
 const columnHeading = "text-sm font-semibold tracking-tight text-foreground";
 
 const quickLinkClass = cn(
-  "inline-flex py-1 text-sm text-muted-foreground transition-colors duration-200 ease-out",
-  "hover:text-accent-hover",
-  focusRing,
-  "rounded-sm",
+  touchTextLink,
+  "text-sm text-muted-foreground hover:text-accent-hover",
 );
 
 const socialBox = cn(
-  "inline-flex h-10 w-10 items-center justify-center rounded-md border border-border-muted/80 text-muted-foreground",
+  "inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-md border border-border-muted/80 text-muted-foreground",
   "transition-[border-color,color,background-color] duration-200 ease-out",
   "hover:border-accent/35 hover:text-accent-hover",
   focusRing,
@@ -118,10 +116,8 @@ export function Footer() {
         <Link
           href="/#top"
           className={cn(
-            "w-fit text-left text-xs text-muted-foreground transition-colors duration-200 ease-out sm:text-[13px]",
-            "hover:text-accent-hover",
-            focusRing,
-            "rounded-sm",
+            touchTextLink,
+            "w-fit text-left text-xs text-muted-foreground hover:text-accent-hover sm:text-[13px]",
           )}
         >
           Back to top <span aria-hidden>↑</span>

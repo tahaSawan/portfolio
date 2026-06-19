@@ -40,7 +40,7 @@ function MoonIcon({ className }: { className?: string }) {
 }
 
 const btnClass = cn(
-  "inline-flex h-9 w-9 items-center justify-center rounded-full border border-border-muted/70 text-muted-foreground",
+  "inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-full border border-border-muted/70 text-muted-foreground",
   btnTransition,
   "hover:border-accent/35 hover:text-accent-hover",
   focusRing,

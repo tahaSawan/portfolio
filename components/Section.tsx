@@ -44,8 +44,8 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative scroll-mt-24 sm:scroll-mt-28",
-        "py-14 sm:py-20 lg:py-[6.75rem]",
+        "relative scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-28",
+        "py-10 sm:py-16 lg:py-[6.75rem]",
         divider && "border-t border-border-muted/85",
         className,
       )}
@@ -57,13 +57,15 @@ export function Section({
         />
       ) : null}
       {circuitGlow ? (
-        <CircuitGlowLines
-          instanceId={glowId}
-          pathSet={sectionCircuitPathSet(id)}
-          variant="section"
-          showScan={false}
-          showVignette={false}
-        />
+        <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
+          <CircuitGlowLines
+            instanceId={glowId}
+            pathSet={sectionCircuitPathSet(id)}
+            variant="section"
+            showScan={false}
+            showVignette={false}
+          />
+        </div>
       ) : null}
       <div className="relative z-10">
         {reveal ? <SectionReveal>{children}</SectionReveal> : children}

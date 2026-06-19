@@ -12,7 +12,7 @@ export default async function HomePage() {
   const projects = withDiskScreenshotsAll(site.projects);
 
   return (
-    <main className="pb-28 sm:pb-36 md:pb-40">
+    <main className="pb-20 sm:pb-36 md:pb-40">
       <Section id="top" className="!py-0" divider={false} circuitGlow={false}>
         <Hero />
       </Section>

@@ -282,6 +282,32 @@ html.dark {
     animation: circuit-glow-scan 9s ease-in-out infinite;
   }
 
+  /* Lighter circuit FX on phones — performance + readability */
+  @media (max-width: 767px) {
+    .circuit-glow__svg {
+      animation: none;
+    }
+
+    .circuit-glow__path {
+      animation: none;
+      stroke-dashoffset: 0;
+      opacity: 0.42;
+    }
+
+    .circuit-glow__node {
+      animation: none;
+      opacity: 0.55;
+    }
+
+    .circuit-glow__scan {
+      display: none;
+    }
+
+    .circuit-glow--hero .circuit-glow__lines {
+      filter: none;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .circuit-glow__svg {
       animation: none;

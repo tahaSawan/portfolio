@@ -1,4 +1,5 @@
 import { caseStudies } from "./caseStudies";
+import { certificationLabels } from "./certifications";
 import { RESUME_DOWNLOAD_FILENAME, RESUME_PATH } from "./resumeDownload";
 
 export const site = {
@@ -29,15 +30,7 @@ export const site = {
   educationSchool: "FAST NUCES Islamabad",
   educationDegree: "BS Computer Science (Specialization in Robotics)",
   certificationsHeading: "Certifications",
-  certifications: [
-    "IBM Artificial Intelligence Engineer Professional Certificate",
-    "Advanced Statistics for Data Science",
-    "Essentials of Generative AI",
-    "Python for Data Science",
-    "Data Science with Python",
-    "Programming Essentials",
-    "Machine Learning with Python (In Progress)",
-  ],
+  certifications: certificationLabels,
   achievementsHeading: "Achievements",
   achievements: [
     "Gold Medalist – IGCSE North Region",

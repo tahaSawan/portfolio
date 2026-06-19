@@ -1,4 +1,5 @@
 import { caseStudies } from "@/lib/caseStudies";
+import { certifications } from "@/lib/certifications";
 import { site } from "@/lib/site";
 import type { KnowledgeChunk } from "@/lib/rag/types";
 
@@ -64,7 +65,7 @@ export function buildKnowledgeChunks(): KnowledgeChunk[] {
       url: "/#education",
       text: [
         `${site.educationDegree} at ${site.educationSchool}.`,
-        `${site.certificationsHeading}: ${site.certifications.join("; ")}.`,
+        `${site.certificationsHeading}: ${certifications.map((c) => `${c.title} (${c.issuer}, ${c.date})`).join("; ")}.`,
         `${site.achievementsHeading}: ${site.achievements.join("; ")}.`,
       ].join(" "),
     }),

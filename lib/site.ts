@@ -9,7 +9,7 @@ export const site = {
   description:
     "Taha S Awan — AI engineer, data science enthusiast, and full-stack developer building AI-powered platforms, ML systems, and scalable backends.",
   heroDescription:
-    "Aspiring Data Scientist and AI Engineer with hands-on experience building AI-powered full-stack platforms, machine learning systems, analytics solutions, and scalable backend applications.",
+    "FAST NUCES graduate and gold medalist — Data Scientist and AI Engineer with hands-on experience building AI-powered full-stack platforms, machine learning systems, analytics solutions, and scalable backend applications.",
   resumeUrl: RESUME_PATH,
   resumeDownloadFileName: RESUME_DOWNLOAD_FILENAME,
   nav: [
@@ -22,20 +22,21 @@ export const site = {
   ],
   aboutTitle: "About",
   aboutParagraphs: [
-    "I am a Computer Science student at FAST NUCES Islamabad specializing in Robotics. I am passionate about Artificial Intelligence, Machine Learning, Data Science, Robotics, and Full Stack Development.",
+    "I recently graduated from FAST NUCES Islamabad with a BS in Computer Science (Robotics specialization), earning a gold medal for academic excellence. I am passionate about Artificial Intelligence, Machine Learning, Data Science, Robotics, and Full Stack Development.",
     "I enjoy building intelligent systems, AI-powered platforms, analytics solutions, and scalable software products that combine engineering with impactful real-world applications.",
-    "I am currently exploring AI systems, intelligent automation, machine learning workflows, and production-ready software architectures.",
+    "I focus on AI systems, intelligent automation, machine learning workflows, and production-ready software architectures — turning ideas into reliable, production-grade software.",
   ],
   educationTitle: "Education & Certifications",
   educationSchool: "FAST NUCES Islamabad",
-  educationDegree: "BS Computer Science (Specialization in Robotics)",
+  educationDegree:
+    "BS Computer Science (Specialization in Robotics) — Graduate",
   certificationsHeading: "Certifications",
   certifications: certificationLabels,
   achievementsHeading: "Achievements",
   achievements: [
     "Gold Medalist – IGCSE North Region",
     "Silver Medalist – A Levels",
-    "Gold Medalist – 1st Semester BS Computer Science",
+    "Gold Medalist – BS Computer Science, FAST NUCES Islamabad",
     "Founder of an AI-focused startup currently in development phase",
   ],
   skillsTitle: "Skills",

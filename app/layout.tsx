@@ -8,6 +8,7 @@ import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { SiteCircuitBackdrop } from "@/components/SiteCircuitBackdrop";
+import { PortfolioAssistant } from "@/components/PortfolioAssistant";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import {
   seoDefaultTitle,
@@ -100,6 +101,7 @@ export default function RootLayout({
               </AppContentFade>
             </Container>
           </SiteCircuitBackdrop>
+          <PortfolioAssistant />
         </ThemeProvider>
       </body>
     </html>

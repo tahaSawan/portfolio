@@ -26,6 +26,7 @@ const SYNONYM_GROUPS: readonly (readonly string[])[] = [
   ["contact", "email", "reach", "hire", "linkedin", "phone"],
   ["education", "fast", "nuces", "degree", "certification"],
   ["resume", "cv", "download"],
+  ["job fit", "fit check", "job description", "role match", "match score", "hiring"],
   ["tableau", "analytics", "sales", "apparel"],
   [
     "turnover",

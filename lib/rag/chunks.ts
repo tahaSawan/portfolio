@@ -73,6 +73,20 @@ export function buildKnowledgeChunks(): KnowledgeChunk[] {
 
   chunks.push(
     chunk({
+      id: "job-fit",
+      title: "Job Fit Analyzer",
+      section: "Fit Check",
+      url: "/#job-fit",
+      text: [
+        "Job Fit Analyzer at /#job-fit — paste a job description to get an AI-powered match score against Taha's portfolio.",
+        "Returns match percentage, matched skills with evidence, relevant projects, gaps with framing suggestions, and interview talking points.",
+        "Grounded in real projects, skills, certifications, and education — not invented experience.",
+      ].join(" "),
+    }),
+  );
+
+  chunks.push(
+    chunk({
       id: "contact",
       title: site.contactTitle,
       section: "Contact",

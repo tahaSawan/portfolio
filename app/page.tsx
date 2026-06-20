@@ -4,6 +4,7 @@ import { About } from "@/sections/About";
 import { Skills } from "@/sections/Skills";
 import { Projects } from "@/sections/Projects";
 import { Education } from "@/sections/Education";
+import { JobFit } from "@/sections/JobFit";
 import { Contact } from "@/sections/Contact";
 import { site } from "@/lib/site";
 import { withDiskScreenshotsAll } from "@/lib/projectDiskScreenshots";
@@ -25,7 +26,10 @@ export default async function HomePage() {
       <Section id="projects" divider reveal>
         <Projects projects={projects} />
       </Section>
-      <Section id="education" tone="muted" divider reveal>
+      <Section id="job-fit" tone="muted" divider reveal>
+        <JobFit />
+      </Section>
+      <Section id="education" divider reveal>
         <Education />
       </Section>
       <Section id="contact" divider reveal>

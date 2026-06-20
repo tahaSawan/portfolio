@@ -37,6 +37,7 @@ const SUGGESTED_PROMPTS = [
   "What's his AI & ML experience?",
   "Tell me about PrepXpert",
   "How can I hire him?",
+  "Check fit for an ML engineer role",
 ] as const;
 
 const PEEK_LINE =

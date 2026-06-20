@@ -23,7 +23,12 @@ export type RateLimitResult =
   | { ok: true; remaining: number }
   | { ok: false; retryAfterSec: number };
 
-export function checkRateLimit(key: string): RateLimitResult {
+export function checkRateLimit(
+  key: string,
+  options?: { max?: number; windowMs?: number },
+): RateLimitResult {
+  const max = options?.max ?? RATE_LIMIT_MAX_REQUESTS;
+  const windowMs = options?.windowMs ?? RATE_LIMIT_WINDOW_MS;
   const now = Date.now();
   const map = buckets();
   const existing = map.get(key);
@@ -31,18 +36,18 @@ export function checkRateLimit(key: string): RateLimitResult {
   if (!existing || now >= existing.resetAt) {
     map.set(key, {
       count: 1,
-      resetAt: now + RATE_LIMIT_WINDOW_MS,
+      resetAt: now + windowMs,
     });
-    return { ok: true, remaining: RATE_LIMIT_MAX_REQUESTS - 1 };
+    return { ok: true, remaining: max - 1 };
   }
 
-  if (existing.count >= RATE_LIMIT_MAX_REQUESTS) {
+  if (existing.count >= max) {
     const retryAfterSec = Math.ceil((existing.resetAt - now) / 1_000);
     return { ok: false, retryAfterSec };
   }
 
   existing.count += 1;
-  return { ok: true, remaining: RATE_LIMIT_MAX_REQUESTS - existing.count };
+  return { ok: true, remaining: max - existing.count };
 }
 
 export function clientIp(request: Request): string {

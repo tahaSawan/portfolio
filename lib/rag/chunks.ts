@@ -73,6 +73,20 @@ export function buildKnowledgeChunks(): KnowledgeChunk[] {
 
   chunks.push(
     chunk({
+      id: "github-activity",
+      title: "Building in public",
+      section: "GitHub",
+      url: "/#github",
+      text: [
+        `GitHub profile: ${site.contact.github}.`,
+        "Live GitHub strip on the portfolio shows recently pushed public repos, stars, followers, and recent push activity.",
+        "Featured portfolio repos link back to case studies when the GitHub URL matches a project.",
+      ].join(" "),
+    }),
+  );
+
+  chunks.push(
+    chunk({
       id: "job-fit",
       title: "Job Fit Analyzer",
       section: "Fit Check",

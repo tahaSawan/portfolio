@@ -4,6 +4,7 @@ import { About } from "@/sections/About";
 import { Skills } from "@/sections/Skills";
 import { Projects } from "@/sections/Projects";
 import { Education } from "@/sections/Education";
+import { GitHubActivity } from "@/sections/GitHubActivity";
 import { JobFit } from "@/sections/JobFit";
 import { Contact } from "@/sections/Contact";
 import { site } from "@/lib/site";
@@ -26,10 +27,13 @@ export default async function HomePage() {
       <Section id="projects" divider reveal>
         <Projects projects={projects} />
       </Section>
-      <Section id="job-fit" tone="muted" divider reveal>
+      <Section id="github" tone="muted" divider reveal>
+        <GitHubActivity />
+      </Section>
+      <Section id="job-fit" divider reveal>
         <JobFit />
       </Section>
-      <Section id="education" divider reveal>
+      <Section id="education" tone="muted" divider reveal>
         <Education />
       </Section>
       <Section id="contact" divider reveal>

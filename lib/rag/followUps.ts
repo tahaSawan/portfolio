@@ -25,7 +25,9 @@ const PROJECT_FOLLOW_UPS: Record<string, string[]> = {
     "Tell me about the robotics work",
   ],
   "australian-apparel-sales": [
-    "What tools were used for the sales analysis?",
+    "What were the top findings from the AAL sales analysis?",
+    "Which Australian states underperformed in Q4 2020?",
+    "What tools were used for the apparel sales project?",
   ],
   "employee-turnover-analytics": [
     "How does the turnover model handle class imbalance?",

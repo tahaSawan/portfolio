@@ -283,84 +283,59 @@ export const caseStudies: readonly ProjectCaseStudy[] = [
     projectPreviewStem: "01-hero",
   },
   {
-    slug: "precision-farming-robot",
-    title: "Precision farming robot",
-    overview:
-      "Autonomous field prototype for weed detection and targeted response, combining lightweight vision models with robotics constraints suitable for real agricultural environments.",
-    features: [
-      "YOLOv8n pipelines tuned for field imagery and edge-friendly inference budgets",
-      "Dataset curation and augmentation oriented toward crop and weed diversity",
-      "Control paths that pair detections with actuation logic for safe field trials",
-      "Python tooling for training, evaluation, and reproducible experiment tracking",
-    ],
-    challenges: [
-      "Operating under variable lighting, dust, and occlusions common in outdoor rows",
-      "Trading off model accuracy against latency on compute-limited robot hardware",
-      "Grounding detections in reliable spatial frames for safe mechanical response",
-    ],
-    technologies: ["Python", "YOLOv8", "Computer Vision", "Robotics"],
-    architecture: {
-      caption:
-        "Sense–decide–act loop: camera frames through a vision stack, fused with motion state, before commands reach the elimination mechanism.",
-    },
-    highlights: [
-      {
-        title: "Edge-first vision",
-        description:
-          "Model choices and input resolutions aimed at dependable inference where cloud offload is not guaranteed.",
-      },
-      {
-        title: "Field realism",
-        description:
-          "Training signals that reflect messy outdoor conditions instead of idealized lab captures alone.",
-      },
-    ],
-    futureImprovements: [
-      "Sensor fusion with IMU/GPS for tighter row following under drift",
-      "Hardware-in-the-loop tests before expanding to taller crop canopies",
-      "Telemetry pipeline for fleet-level weed pressure maps over a season",
-    ],
-    githubUrl: "https://github.com/tahaSawan/precision-farming-robot",
-  },
-  {
     slug: "australian-apparel-sales",
-    title: "Australian apparel — sales intelligence",
+    title: "Australian Apparel Sales Analysis — Q4 2020",
     overview:
-      "Analytics case study on regional apparel performance: exploratory analysis, KPI framing, and dashboards that highlight revenue drivers and underperforming segments.",
+      "Exploratory data analysis of AAL (Australian Apparel Limited) Q4 2020 retail sales across seven states, four customer segments, and time-of-day patterns — turning 7,560 transaction records into an executive dashboard and strategic recommendations for Sales & Marketing.",
     features: [
-      "Exploratory analysis with Pandas to profile regions, categories, and seasonality",
-      "Tableau dashboards for executives and operators with consistent metric definitions",
-      "Matplotlib and Seaborn visuals for publication-ready narrative charts",
-      "Clear documentation of assumptions, joins, and data quality checks",
+      "Seven-phase EDA pipeline: data understanding, cleaning, univariate/bivariate/multivariate analysis, time series, and executive recommendations",
+      "Executive dashboard summarizing state rankings, demographic split, time-of-day patterns, monthly performance, and 90-day daily trend",
+      "State performance analysis — VIC leads at 31% share ($105.6M); WA/NT/TAS flagged for targeted growth programs",
+      "Multivariate heatmaps (state × group, time × state) revealing regional vs demographic drivers",
+      "20+ Matplotlib/Seaborn visualizations with documented KPI dictionary and zero missing values / duplicates",
     ],
     challenges: [
-      "Reconciling sparse regional data with headline revenue trends without misleading cuts",
-      "Keeping visual language consistent across exploratory and executive-facing views",
-      "Surfacing actionable next steps instead of static historical reporting alone",
+      "Translating right-skewed sales distributions (skewness 1.09) into executive-friendly metrics without oversimplifying",
+      "Reconciling evenly split demographic revenue (~25% each group) with sharply uneven state performance (VIC 4.8× WA)",
+      "Surfacing actionable staffing and promotion insights when time-of-day splits are nearly equal (~33% each period)",
     ],
-    technologies: ["Python", "Pandas", "Tableau", "Matplotlib"],
+    technologies: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn",
+      "Jupyter Notebook",
+      "scikit-learn",
+    ],
     architecture: {
       caption:
-        "Notebook-first EDA feeding curated datasets into Tableau extracts; chart semantics stay aligned to a single KPI dictionary shared with stakeholders.",
+        "CSV ingest → Jupyter EDA notebook (7 phases) → statistical profiling and 13+ chart assets → executive dashboard and README-ready visual exports via generate_readme_assets.py.",
     },
     highlights: [
       {
-        title: "Metric discipline",
+        title: "$340.3M Q4 analyzed",
         description:
-          "One source of truth for revenue and margin definitions before any regional comparison ships to leadership.",
+          "136,121 units across 90 days (Oct–Dec 2020) at $2,500/unit fixed pricing — December drove 39.8% of quarter revenue (+49.2% vs November).",
       },
       {
-        title: "Narrative visuals",
+        title: "State-led growth levers",
         description:
-          "Matplotlib/Seaborn for analyst review, Tableau for recurring operational monitoring with the same cuts.",
+          "VIC generates $83.4M more than WA; recommendations target WA, NT, and TAS while protecting VIC, NSW, and SA leadership.",
+      },
+      {
+        title: "Operational insights",
+        description:
+          "Morning peaks nationally but SA peaks Afternoon and NT Evening — staffing and evening NBO campaigns should vary by state, not one national schedule.",
       },
     ],
     futureImprovements: [
-      "Scheduled data quality checks before extract refresh",
-      "Scenario models for discount and seasonality stress tests",
-      "Lightweight API layer if live dashboards need embedding outside Tableau",
+      "Interactive Plotly/Streamlit dashboard for drill-down by state and segment",
+      "November mid-Q4 promotional scenario modeling before December surge",
+      "Scheduled data quality checks if pipeline moves beyond static CSV ingest",
     ],
-    githubUrl: "https://github.com/tahaSawan/australian-apparel-sales-analysis",
+    githubUrl: "https://github.com/tahaSawan/apparel-sales-analysis",
+    projectPreviewStem: "01-executive-dashboard",
   },
   {
     slug: "employee-turnover-analytics",
@@ -421,6 +396,46 @@ export const caseStudies: readonly ProjectCaseStudy[] = [
     githubUrl: "https://github.com/tahaSawan/employee-turnover-analytics",
     imagesFolder: "Employee-Turnover",
     projectPreviewStem: "07_cv_f1_comparison",
+  },
+  {
+    slug: "precision-farming-robot",
+    title: "Precision farming robot",
+    overview:
+      "Autonomous field prototype for weed detection and targeted response, combining lightweight vision models with robotics constraints suitable for real agricultural environments.",
+    features: [
+      "YOLOv8n pipelines tuned for field imagery and edge-friendly inference budgets",
+      "Dataset curation and augmentation oriented toward crop and weed diversity",
+      "Control paths that pair detections with actuation logic for safe field trials",
+      "Python tooling for training, evaluation, and reproducible experiment tracking",
+    ],
+    challenges: [
+      "Operating under variable lighting, dust, and occlusions common in outdoor rows",
+      "Trading off model accuracy against latency on compute-limited robot hardware",
+      "Grounding detections in reliable spatial frames for safe mechanical response",
+    ],
+    technologies: ["Python", "YOLOv8", "Computer Vision", "Robotics"],
+    architecture: {
+      caption:
+        "Sense–decide–act loop: camera frames through a vision stack, fused with motion state, before commands reach the elimination mechanism.",
+    },
+    highlights: [
+      {
+        title: "Edge-first vision",
+        description:
+          "Model choices and input resolutions aimed at dependable inference where cloud offload is not guaranteed.",
+      },
+      {
+        title: "Field realism",
+        description:
+          "Training signals that reflect messy outdoor conditions instead of idealized lab captures alone.",
+      },
+    ],
+    futureImprovements: [
+      "Sensor fusion with IMU/GPS for tighter row following under drift",
+      "Hardware-in-the-loop tests before expanding to taller crop canopies",
+      "Telemetry pipeline for fleet-level weed pressure maps over a season",
+    ],
+    githubUrl: "https://github.com/tahaSawan/precision-farming-robot",
   },
 ];
 

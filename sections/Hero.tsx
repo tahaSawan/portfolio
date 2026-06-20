@@ -17,7 +17,7 @@ export function Hero() {
   return (
     <header
       className={cn(
-        "relative flex min-h-[calc(100dvh-3.5rem)] flex-col items-center overflow-hidden border-b border-border-muted/85",
+        "relative flex min-h-[min(100dvh-3.25rem,44rem)] flex-col items-center overflow-hidden border-b border-border-muted/85",
         "sm:min-h-[calc(100svh-4rem)] md:min-h-[calc(100svh-4.75rem)]",
       )}
     >
@@ -44,7 +44,7 @@ export function Hero() {
 
       <div
         className={cn(
-          "relative z-10 flex w-full flex-1 flex-col items-center justify-center py-10",
+          "relative z-10 flex w-full flex-1 flex-col items-center justify-center py-8",
           "sm:py-14 md:py-20",
         )}
       >

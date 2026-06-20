@@ -14,7 +14,7 @@ export function Skills() {
       <div
         className={cn(
           afterSectionHeading,
-          "grid grid-cols-1 gap-9 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-11 lg:gap-y-11",
+          "grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-11 lg:gap-y-11",
         )}
       >
         {site.skillGroups.map((group) => (

@@ -1,6 +1,5 @@
 import { site } from "@/lib/site";
-import { certifications } from "@/lib/certifications";
-import { CertificateCard } from "@/components/CertificateCard";
+import { CertificateGallery } from "@/components/CertificateGallery";
 import { cn } from "@/lib/cn";
 import {
   afterSectionHeading,
@@ -11,7 +10,7 @@ import {
 } from "@/lib/ui";
 
 const card = cn(
-  "rounded-lg border border-border-muted/85 bg-surface-raised p-6 sm:p-7 md:p-8 lg:p-9",
+  "rounded-lg border border-border-muted/85 bg-surface-raised p-5 sm:p-7 md:p-8 lg:p-9",
   cardSurfaceTransition,
   "hover:border-accent/32 hover:bg-card motion-safe:hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
 );
@@ -40,11 +39,7 @@ export function Education() {
 
         <article className={card}>
           <h3 className={labelOverlineAccent}>{site.certificationsHeading}</h3>
-          <div className="mt-5 grid gap-5 sm:mt-6 sm:grid-cols-2 lg:grid-cols-3">
-            {certifications.map((cert) => (
-              <CertificateCard key={cert.id} cert={cert} />
-            ))}
-          </div>
+          <CertificateGallery />
         </article>
 
         <article className={card}>

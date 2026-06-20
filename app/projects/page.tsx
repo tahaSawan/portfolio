@@ -16,8 +16,8 @@ export default async function ProjectsPage() {
   const projects = withDiskScreenshotsAll(site.projects);
 
   return (
-    <main className="pb-20 sm:pb-36 md:pb-40">
-      <section className="relative scroll-mt-20 overflow-hidden border-b border-border-muted/85 py-10 sm:scroll-mt-24 sm:py-16 lg:py-[6.75rem] md:scroll-mt-28">
+    <main className="pb-28 sm:pb-36 md:pb-40">
+      <section className="relative scroll-mt-20 overflow-hidden border-b border-border-muted/85 py-8 sm:scroll-mt-24 sm:py-16 lg:py-[6.75rem] md:scroll-mt-28">
         <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
           <CircuitGlowLines
             instanceId="projects-index"

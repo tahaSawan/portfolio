@@ -45,7 +45,7 @@ export function Section({
       id={id}
       className={cn(
         "relative scroll-mt-20 sm:scroll-mt-24 md:scroll-mt-28",
-        "py-10 sm:py-16 lg:py-[6.75rem]",
+        "py-8 sm:py-16 lg:py-[6.75rem]",
         divider && "border-t border-border-muted/85",
         className,
       )}

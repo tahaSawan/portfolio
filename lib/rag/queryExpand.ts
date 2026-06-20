@@ -6,6 +6,15 @@ const SYNONYM_GROUPS: readonly (readonly string[])[] = [
   ["prepxpert", "prep xpert", "mdcat", "test prep", "myprepxpert"],
   ["legalconnect", "legal connect", "legalconnectpk", "legal tech"],
   [
+    "reweave",
+    "re:weave",
+    "reweave-website",
+    "circular textiles",
+    "textile infrastructure",
+    "sweden client",
+    "sustainability",
+  ],
+  [
     "jobgpt",
     "job gpt",
     "career-ops",

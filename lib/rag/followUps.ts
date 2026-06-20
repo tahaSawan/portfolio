@@ -10,6 +10,11 @@ const PROJECT_FOLLOW_UPS: Record<string, string[]> = {
     "How does LegalConnect use AI?",
     "What's the LegalConnect tech stack?",
   ],
+  "reweave-website": [
+    "What is the RE:WEAVE project about?",
+    "What's the RE:WEAVE tech stack?",
+    "Can I see the live RE:WEAVE website?",
+  ],
   jobgpt: [
     "How does JobGPT rank jobs against a resume?",
     "What job boards does JobGPT search?",

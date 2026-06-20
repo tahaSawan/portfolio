@@ -162,6 +162,66 @@ export const caseStudies: readonly ProjectCaseStudy[] = [
     projectPreviewStem: "Legalconnect-home",
   },
   {
+    slug: "reweave-website",
+    title: "RE:WEAVE — circular material infrastructure platform site",
+    overview:
+      "Client project for a Sweden-based circular-textile startup: a multi-page Next.js marketing and investor platform that presents RE:WEAVE's five-pillar ecosystem — from autonomous recycling and material intelligence to Earth–Space infrastructure — with trust signals, market context, and financial outlook sections.",
+    features: [
+      "Cinematic hero and narrative homepage framing circular textiles as strategic infrastructure for Earth and Space",
+      "Dedicated routes for System, Applications, Model, Shift, Partner, IP Platform, Vision, and supporting pages (About, Contact, Press, Legal)",
+      "Visual storytelling: market-crisis statistics, the imperative (regulatory and geopolitical risk), and trust/validation cards (ARC 90% fiber purity, India pilots, ESA & ECSS alignment)",
+      "Strategic sovereignty section with materials–systems–impact grid and circular pillar diagram",
+      "Five-year revenue forecast and business-model sections for investor-facing clarity",
+      "Consistent brand system — dark hero panels, gold accent typography, capsule CTAs, and responsive section layouts",
+      "Deployed on Vercel with static assets and image-driven section components",
+    ],
+    challenges: [
+      "Translating dense sustainability, robotics, and space-infrastructure concepts into scannable investor-grade sections",
+      "Maintaining visual consistency across many standalone pages while each tells a distinct part of the ecosystem story",
+      "Balancing regulatory and technical credibility (ESPR, DPP, EPR, ESA standards) without overwhelming non-expert visitors",
+      "Structuring reusable section components so content updates stay fast for an evolving client pitch deck",
+    ],
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vercel",
+    ],
+    architecture: {
+      caption:
+        "App Router pages compose reusable section components; Tailwind-driven design tokens carry the RE:WEAVE brand across routes, with public assets served from /public and deployed as a static marketing surface on Vercel.",
+    },
+    highlights: [
+      {
+        title: "Investor-ready narrative",
+        description:
+          "Market crisis stats, trust signals, and a five-year revenue forecast turn technical circularity into a coherent business story.",
+      },
+      {
+        title: "Multi-route ecosystem map",
+        description:
+          "System, Applications, Model, Shift, and Partner pages let stakeholders explore each pillar without losing brand cohesion.",
+      },
+      {
+        title: "Earth ↔ Space positioning",
+        description:
+          "Hero and imperative sections anchor RE:WEAVE as autonomous infrastructure for both terrestrial manufacturing hubs and space environments.",
+      },
+    ],
+    futureImprovements: [
+      "CMS or markdown layer so client teams can update copy and metrics without code changes",
+      "Localized variants for EU and India market pages already referenced in trust sections",
+      "Analytics and A/B hooks on primary CTAs (Book a Call, Explore Infrastructure)",
+      "Animation polish on circular diagrams and scroll-linked section reveals",
+    ],
+    githubUrl: "https://github.com/tahaSawan/reweave-website",
+    liveDemoUrl: "https://reweave-website-sigma.vercel.app/",
+    liveDemoLabel: "Website",
+    imagesFolder: "reweave-website",
+    projectPreviewStem: "01-hero",
+  },
+  {
     slug: "jobgpt",
     title: "JobGPT — AI job search & application copilot",
     overview:

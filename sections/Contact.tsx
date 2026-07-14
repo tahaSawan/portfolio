@@ -41,7 +41,7 @@ const cardHeading =
 
 export function Contact() {
   const { email, phone, linkedIn, github } = site.contact;
-  const phoneTel = `tel:${phone.replace(/\s/g, "")}`;
+  const phoneTel = `tel:${phone.replace(/[\s()-]/g, "")}`;
   const locationLine = `${site.educationSchool}, Pakistan`;
 
   return (

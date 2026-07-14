@@ -108,7 +108,7 @@ export const site = {
   contactTitle: "Contact",
   contact: {
     email: "taha.awan2k3@gmail.com",
-    phone: "+92 3079655594",
+    phone: "+1 4697858260",
     linkedIn: "https://www.linkedin.com/in/taha-s-awan-30b278330",
     github: "https://github.com/tahaSawan",
     linkedInDisplay: "linkedin.com/in/taha-s-awan-30b278330",

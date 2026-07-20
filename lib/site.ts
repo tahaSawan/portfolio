@@ -1,6 +1,11 @@
 import { caseStudies } from "./caseStudies";
 import { certificationLabels } from "./certifications";
-import { RESUME_DOWNLOAD_FILENAME, RESUME_PATH } from "./resumeDownload";
+import {
+  RESUME_DATA_ANALYST_DOWNLOAD_FILENAME,
+  RESUME_DATA_ANALYST_PATH,
+  RESUME_DOWNLOAD_FILENAME,
+  RESUME_PATH,
+} from "./resumeDownload";
 
 export const site = {
   name: "Taha S Awan",
@@ -12,6 +17,8 @@ export const site = {
     "FAST NUCES graduate and gold medalist — Data Scientist and AI Engineer with hands-on experience building AI-powered full-stack platforms, machine learning systems, analytics solutions, and scalable backend applications.",
   resumeUrl: RESUME_PATH,
   resumeDownloadFileName: RESUME_DOWNLOAD_FILENAME,
+  resumeDataAnalystUrl: RESUME_DATA_ANALYST_PATH,
+  resumeDataAnalystDownloadFileName: RESUME_DATA_ANALYST_DOWNLOAD_FILENAME,
   nav: [
     { href: "/#top", label: "Home" },
     { href: "/#about", label: "About" },

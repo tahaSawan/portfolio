@@ -106,6 +106,15 @@ export function Hero() {
               <DownloadTrayIcon className="h-[1.05rem] w-[1.05rem] shrink-0 text-accent/85 transition-colors duration-200 ease-out group-hover:text-accent-hover" />
               Download Resume
             </a>
+            <a
+              href={site.resumeDataAnalystUrl}
+              download={site.resumeDataAnalystDownloadFileName}
+              className={buttonHeroResume}
+              aria-label="Download data analyst resume as PDF"
+            >
+              <DownloadTrayIcon className="h-[1.05rem] w-[1.05rem] shrink-0 text-accent/85 transition-colors duration-200 ease-out group-hover:text-accent-hover" />
+              Data Analyst Resume
+            </a>
             <Link href="/#contact" className={buttonHero}>
               Contact Me
             </Link>

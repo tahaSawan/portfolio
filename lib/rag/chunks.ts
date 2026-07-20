@@ -112,6 +112,7 @@ export function buildKnowledgeChunks(): KnowledgeChunk[] {
         `GitHub: ${site.contact.github}.`,
         `Location: ${site.educationSchool}, Pakistan.`,
         `Resume download: ${site.resumeUrl}.`,
+        `Data Analyst resume download: ${site.resumeDataAnalystUrl}.`,
       ].join(" "),
     }),
   );

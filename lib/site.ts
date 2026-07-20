@@ -66,6 +66,16 @@ export const site = {
         "Clustering",
         "Cross-Validation",
         "Class Imbalance (SMOTE)",
+        "Association Rules (Apriori)",
+      ],
+    },
+    {
+      title: "Big Data",
+      items: [
+        "Apache Spark",
+        "Apache Kafka",
+        "Hadoop",
+        "Apache Storm",
       ],
     },
     {

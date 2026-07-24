@@ -78,6 +78,37 @@
         color: #222;
       }
 
+      .job {
+        margin-bottom: 4pt;
+        break-inside: avoid;
+      }
+
+      .job-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 8pt;
+        font-weight: 700;
+        font-size: 9pt;
+      }
+
+      .job-meta {
+        font-size: 8.5pt;
+        font-weight: 400;
+        color: #444;
+        margin-top: 0.5pt;
+      }
+
+      .job ul {
+        margin: 1.5pt 0 0 11pt;
+        padding: 0;
+      }
+
+      .job li {
+        margin-bottom: 0.5pt;
+        font-size: 8.65pt;
+        color: #222;
+      }
+
       .edu-row {
         display: flex;
         justify-content: space-between;
@@ -190,6 +221,50 @@
     </section>
 
     <section>
+      <h2>Experience</h2>
+
+      <div class="job">
+        <div class="job-head">
+          <span>Freelance AI/ML Product Developer</span>
+          <span>June 2025 – Present</span>
+        </div>
+        <p class="job-meta">Independent · AI-powered products (incl. PrepXpert)</p>
+        <ul>
+          <li>
+            Designed and shipped AI-powered product platforms end-to-end — practice workflows,
+            authentication, REST APIs, and PostgreSQL-backed features.
+          </li>
+          <li>
+            Integrated OpenAI-assisted learning flows and progress/weakness tracking to turn
+            usage data into actionable product improvements.
+          </li>
+          <li>
+            Owned scope, delivery, and iteration across multiple personal AI/ML products from
+            concept to deployed web applications.
+          </li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-head">
+          <span>Freelance Frontend Developer</span>
+          <span>June 2026</span>
+        </div>
+        <p class="job-meta">Client project · Sweden (RE:WEAVE)</p>
+        <ul>
+          <li>
+            Delivered a multi-page Next.js / React / TypeScript marketing and investor website
+            matching client requirements on a two-day turnaround.
+          </li>
+          <li>
+            Translated brand and content briefs into responsive, production-ready pages and
+            deployed the site for stakeholder review.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
       <h2>Education</h2>
       <div class="edu-row">
         <span>FAST NUCES Islamabad</span>
@@ -231,22 +306,6 @@
 
     <section>
       <h2>Projects</h2>
-
-      <div class="project">
-        <div class="project-head">
-          <span>PrepXpert — AI-Powered Test Preparation Platform</span>
-        </div>
-        <ul>
-          <li>
-            Built Pakistan’s AI test prep platform (MDCAT & entry tests) with Next.js,
-            PostgreSQL, and OpenAI-assisted practice.
-          </li>
-          <li>
-            Designed secure auth, REST APIs, weakness tracking, and gamified XP-based learning
-            experiences.
-          </li>
-        </ul>
-      </div>
 
       <div class="project">
         <div class="project-head">
@@ -347,7 +406,7 @@
       <ul class="achievements">
         <li>Gold Medalist — BS Computer Science, FAST NUCES Islamabad</li>
         <li>Gold Medalist — IGCSE North Region (9A*) · Silver Medalist — A Levels</li>
-        <li>Founder of an AI-focused startup currently in development phase</li>
+        <li>Built and shipped multiple independent AI-powered product platforms</li>
       </ul>
     </section>
   </body>

@@ -12,12 +12,12 @@ const targets = [
   {
     html: "resume.html",
     pdf: "resume.pdf",
-    margin: { top: "0.42in", right: "0.48in", bottom: "0.42in", left: "0.48in" },
+    margin: { top: "0.4in", right: "0.5in", bottom: "0.4in", left: "0.5in" },
   },
   {
     html: "resume-data-analyst.html",
     pdf: "resume-data-analyst.pdf",
-    margin: { top: "0.4in", right: "0.48in", bottom: "0.4in", left: "0.48in" },
+    margin: { top: "0.38in", right: "0.48in", bottom: "0.38in", left: "0.48in" },
   },
 ];
 

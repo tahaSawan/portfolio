@@ -80,7 +80,7 @@ export const site = {
     },
     {
       title: "Visualization",
-      items: ["Tableau", "Matplotlib", "Seaborn"],
+      items: ["Tableau", "Power BI", "Microsoft Excel", "Matplotlib", "Seaborn"],
     },
     {
       title: "Web Development",

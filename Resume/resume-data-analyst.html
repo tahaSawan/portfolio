@@ -6,7 +6,7 @@
     <style>
       @page {
         size: letter;
-        margin: 0.38in 0.48in;
+        margin: 0;
       }
 
       * {
@@ -15,412 +15,363 @@
         padding: 0;
       }
 
+      html,
       body {
-        font-family: "Calibri", "Segoe UI", Arial, sans-serif;
-        font-size: 9.03pt;
-        line-height: 1.282;
-        color: #111;
+        background: #1c1c1c;
+        color: #f2f2f2;
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
       }
 
-      a {
-        color: #0d6e63;
-        text-decoration: none;
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 9pt;
+        line-height: 1.32;
+        padding: 0.42in 0.5in 0.4in;
       }
 
-      header {
-        text-align: center;
-        margin-bottom: 7.53pt;
-        padding-bottom: 5.65pt;
-        border-bottom: 1.5pt solid #0d9488;
+      a {
+        color: #d4d4d4;
+        text-decoration: underline;
+        text-underline-offset: 1.5pt;
+      }
+
+      .serif {
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16pt;
+        padding-bottom: 8pt;
+        border-bottom: 0.8pt solid #e8e8e8;
+        margin-bottom: 9pt;
+      }
+
+      .role-label {
+        font-size: 8pt;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #cfcfcf;
+        margin-bottom: 3pt;
       }
 
       h1 {
-        font-size: 16.94pt;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 22pt;
         font-weight: 700;
-        letter-spacing: 0.02em;
-        margin-bottom: 2.35pt;
-        color: #0f172a;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        line-height: 1.05;
+        color: #ffffff;
       }
 
-      .headline {
-        font-size: 9.59pt;
-        font-weight: 600;
-        color: #0d9488;
-        margin-bottom: 3.3pt;
-        letter-spacing: 0.01em;
-      }
-
-      .meta {
-        font-size: 8.65pt;
-        color: #333;
-        line-height: 1.358;
-      }
-
-      .meta span {
+      .contact {
+        text-align: right;
+        font-size: 8.2pt;
+        line-height: 1.45;
+        color: #d8d8d8;
         white-space: nowrap;
-      }
-
-      .sep {
-        color: #888;
-        padding: 0 3.76pt;
       }
 
       section {
-        margin-top: 7.06pt;
+        margin-top: 8pt;
       }
 
       h2 {
-        font-size: 9.69pt;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 12pt;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #0d9488;
-        border-bottom: 0.7pt solid #ccc;
-        padding-bottom: 2.35pt;
-        margin-bottom: 4.24pt;
+        color: #ffffff;
+        margin-bottom: 5pt;
+        padding-bottom: 3pt;
+        border-bottom: 0.7pt solid #e8e8e8;
       }
 
-      .summary {
-        text-align: justify;
-        color: #222;
-        font-size: 9.03pt;
-        line-height: 1.339;
-      }
-
-      .competencies {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2.35pt 0;
-        font-size: 8.75pt;
-        color: #222;
-      }
-
-      .competencies span {
-        white-space: nowrap;
-      }
-
-      .comp-sep {
-        color: #999;
-        padding: 0 3.76pt;
-      }
-
-      .edu-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 7.53pt;
-        font-weight: 600;
-        font-size: 9.41pt;
-      }
-
-      .edu-sub {
-        font-size: 8.85pt;
-        font-weight: 400;
-        color: #333;
-        margin-top: 1.88pt;
-      }
-
-      .job {
-        margin-bottom: 6.12pt;
-      }
-
-      .job-head {
-        display: flex;
-        justify-content: space-between;
-        gap: 7.53pt;
-        font-weight: 700;
-        font-size: 9.41pt;
-      }
-
-      .job-meta {
-        font-size: 8.57pt;
-        font-weight: 400;
-        color: #444;
-        margin-top: 0.94pt;
-      }
-
-      .job ul {
-        margin: 1.88pt 0 0 11.29pt;
-        padding: 0;
-      }
-
-      .job li {
-        margin-bottom: 1.42pt;
-        font-size: 8.85pt;
-        color: #222;
-      }
-
-      .skills-block {
-        margin-bottom: 2.82pt;
-        font-size: 8.8pt;
-      }
-
-      .skills-block strong {
-        color: #111;
-      }
-
-      .project {
-        margin-bottom: 5.18pt;
-      }
-
-      .project-head {
-        font-weight: 700;
-        font-size: 9.22pt;
-        margin-bottom: 0.94pt;
-      }
-
-      .project-stack {
-        font-weight: 400;
-        font-size: 8.47pt;
-        color: #555;
-      }
-
-      .project ul {
-        margin: 1.42pt 0 0 11.29pt;
-        padding: 0;
-      }
-
-      .project li {
-        margin-bottom: 0.94pt;
-        font-size: 8.8pt;
-        color: #222;
-      }
-
-      .two-col {
+      .skills-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1.88pt 13.17pt;
-        font-size: 8.75pt;
+        gap: 1pt 18pt;
+        font-size: 8.7pt;
+        color: #ececec;
       }
 
-      .two-col ul {
-        margin: 0;
-        padding-left: 12pt;
-      }
-
-      .two-col li {
-        margin-bottom: 1.42pt;
-      }
-
-      .achievements {
-        font-size: 8.85pt;
-        padding-left: 12pt;
+      .skills-grid ul {
+        list-style: disc;
+        padding-left: 14pt;
         margin: 0;
       }
 
-      .achievements li {
-        margin-bottom: 1.42pt;
+      .skills-grid li {
+        margin-bottom: 1.5pt;
+      }
+
+      .entry {
+        margin-bottom: 7pt;
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+      }
+
+      .entry-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10pt;
+        margin-bottom: 1.5pt;
+      }
+
+      .entry-title {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 9.4pt;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+        color: #ffffff;
+      }
+
+      .entry-sub {
+        font-size: 8.5pt;
+        color: #cfcfcf;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .entry-date {
+        font-size: 8.5pt;
+        color: #d0d0d0;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .entry-link {
+        font-size: 8pt;
+        color: #c8c8c8;
+        margin-bottom: 2pt;
+      }
+
+      .entry ul {
+        list-style: disc;
+        padding-left: 14pt;
+        margin: 0;
+      }
+
+      .entry li {
+        margin-bottom: 1.8pt;
+        font-size: 8.7pt;
+        color: #ececec;
+      }
+
+      .entry li strong {
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .edu-extra {
+        font-size: 8.5pt;
+        color: #cfcfcf;
+        margin-top: 1pt;
+        padding-left: 0;
       }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Taha S Awan</h1>
-      <p class="headline">
-        Data Analyst | SQL | Python | Excel | Power BI | Tableau
-      </p>
-      <p class="meta">
+    <header class="header">
+      <div>
+        <p class="role-label">Data Analyst / Business Analyst</p>
+        <h1 class="serif">Taha S Awan</h1>
+      </div>
+      <div class="contact">
+        +1 (469) 785-8260<br />
+        taha.awan2k3@gmail.com<br />
+        <a href="https://linkedin.com/in/taha-s-awan-30b278330">LinkedIn</a>
+        ·
+        <a href="https://github.com/tahaSawan">GitHub</a><br />
         Dallas, Texas, USA
-        <span class="sep">|</span>
-        <span>+1 (469) 785-8260</span>
-        <span class="sep">|</span>
-        <span>taha.awan2k3@gmail.com</span>
-        <span class="sep">|</span>
-        <span
-          ><a href="https://linkedin.com/in/taha-s-awan-30b278330"
-            >linkedin.com/in/taha-s-awan-30b278330</a
-          ></span
-        >
-        <span class="sep">|</span>
-        <span><a href="https://github.com/tahaSawan">github.com/tahaSawan</a></span>
-      </p>
+      </div>
     </header>
 
     <section>
-      <h2>Professional Summary</h2>
-      <p class="summary">
-        Recent Computer Science graduate and Gold Medalist focused on data analysis, SQL,
-        Python, Microsoft Excel, Power BI, and Tableau. Experienced in data cleaning,
-        exploratory data analysis (EDA), dashboard development, and KPI reporting to uncover
-        actionable business insights. Seeking an Entry-Level Data Analyst role to turn data
-        into clear reports and decisions.
-      </p>
-    </section>
-
-    <section>
-      <h2>Experience</h2>
-
-      <div class="job">
-        <div class="job-head">
-          <span>Freelance Data Analytics Developer</span>
-          <span>June 2025 – Present</span>
-        </div>
-        <p class="job-meta">Independent · Product analytics, dashboards &amp; reporting</p>
+      <h2 class="serif">Skills</h2>
+      <div class="skills-grid">
         <ul>
-          <li>
-            Analyzed learner performance datasets to surface weak subject areas, engagement
-            trends, and progress KPIs using SQL and Python.
-          </li>
-          <li>
-            Built dashboards and reports to track data quality, learning outcomes, and
-            usage metrics for decision support.
-          </li>
+          <li>Python (Pandas, NumPy, Matplotlib, Seaborn)</li>
+          <li>SQL · PostgreSQL · Jupyter Notebook</li>
+          <li>Microsoft Excel · Power BI · Tableau</li>
+          <li>Exploratory Data Analysis (EDA)</li>
+          <li>Data Cleaning / Wrangling · Data Validation</li>
         </ul>
-      </div>
-
-      <div class="job">
-        <div class="job-head">
-          <span>Freelance Data Reporting Specialist</span>
-          <span>June 2026</span>
-        </div>
-        <p class="job-meta">Client project · Sweden (RE:WEAVE)</p>
         <ul>
-          <li>
-            Structured market statistics, forecast figures, and stakeholder reporting
-            sections from client requirements; delivered organized data-driven content in
-            two days.
-          </li>
+          <li>Descriptive Statistics · Correlation Analysis</li>
+          <li>Time-Series Analysis · Pivot Tables</li>
+          <li>KPI Analysis · Trend Analysis · Dashboards</li>
+          <li>Predictive Modeling · Classification Metrics</li>
+          <li>Git / GitHub · Stakeholder Reporting</li>
         </ul>
       </div>
     </section>
 
     <section>
-      <h2>Core Competencies</h2>
-      <p class="competencies">
-        <span>Data Analysis</span><span class="comp-sep">|</span>
-        <span>Data Cleaning</span><span class="comp-sep">|</span>
-        <span>SQL</span><span class="comp-sep">|</span>
-        <span>Microsoft Excel</span><span class="comp-sep">|</span>
-        <span>Power BI</span><span class="comp-sep">|</span>
-        <span>Tableau</span><span class="comp-sep">|</span>
-        <span>Dashboard Development</span><span class="comp-sep">|</span>
-        <span>KPI Reporting</span><span class="comp-sep">|</span>
-        <span>Business Analysis</span><span class="comp-sep">|</span>
-        <span>Data Quality</span><span class="comp-sep">|</span>
-        <span>EDA</span><span class="comp-sep">|</span>
-        <span>Statistical Analysis</span><span class="comp-sep">|</span>
-        <span>Data Visualization</span><span class="comp-sep">|</span>
-        <span>Documentation</span>
-      </p>
-    </section>
+      <h2 class="serif">Projects</h2>
 
-    <section>
-      <h2>Technical Skills</h2>
-      <p class="skills-block">
-        <strong>Data Analytics:</strong> SQL, Microsoft Excel, Power BI, Python, Pandas,
-        NumPy, Pivot Tables, Power Query, Microsoft Office, Data Interpretation
-      </p>
-      <p class="skills-block">
-        <strong>Data Visualization &amp; Reporting:</strong> Power BI, Tableau, Matplotlib,
-        Seaborn, Dashboards, KPI Reporting, Business Intelligence, Reporting
-      </p>
-      <p class="skills-block">
-        <strong>Business Analytics:</strong> Data Analysis, Business Analysis, Data Quality,
-        Data Cleaning, Data Validation, EDA, Root Cause Analysis, Analytical Thinking
-      </p>
-      <p class="skills-block">
-        <strong>Statistical &amp; ML Support:</strong> Statistical Analysis, Scikit-learn,
-        Regression, Classification, Model Evaluation, Feature Engineering
-      </p>
-      <p class="skills-block">
-        <strong>Databases &amp; Tools:</strong> PostgreSQL, SQL, Git, GitHub, Jupyter
-        Notebook, VS Code
-      </p>
-    </section>
-
-    <section>
-      <h2>Education</h2>
-      <div class="edu-row">
-        <span>FAST NUCES Islamabad</span>
-        <span>Graduate</span>
-      </div>
-      <p class="edu-sub">
-        BS Computer Science (Robotics Specialization) · Gold Medal for Academic Excellence
-      </p>
-    </section>
-
-    <section>
-      <h2>Projects</h2>
-
-      <div class="project">
-        <div class="project-head">
-          Employee Turnover Analytics — HR Retention Analysis
-          <span class="project-stack"
-            >| SQL, Excel, Python, Pandas, EDA, Reporting</span
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Sales Analysis</span>
+            <span class="entry-sub">
+              — Australian Apparel Limited · Python, Pandas, Seaborn, Jupyter</span
+            >
+          </div>
+          <span class="entry-date">Q4 2020</span>
+        </div>
+        <p class="entry-link">
+          <a href="https://github.com/tahaSawan/apparel-sales-analysis"
+            >github.com/tahaSawan/apparel-sales-analysis</a
           >
-        </div>
+        </p>
         <ul>
           <li>
-            Cleaned and analyzed HR attrition data; performed EDA and built risk scores
-            (91.7% recall, 0.979 AUC) with clear reporting for retention decisions.
+            Analyzed <strong>7,560</strong> retail transactions
+            (<strong>$340M</strong>) with <strong>Python/Pandas</strong> to
+            identify a <strong>4.8x revenue gap</strong> between top- and
+            bottom-performing states across 7 regions and 4 customer segments
+          </li>
+          <li>
+            Built <strong>20+</strong> visualizations (heatmaps, time-series
+            trends, distributions) in <strong>Seaborn/Matplotlib</strong> and an
+            executive dashboard to communicate findings to non-technical
+            stakeholders
+          </li>
+          <li>
+            Delivered <strong>6 data-driven recommendations</strong> on regional
+            marketing, peak-hour staffing, and promotional timing, backed by
+            descriptive statistics and correlation analysis
           </li>
         </ul>
       </div>
 
-      <div class="project">
-        <div class="project-head">
-          PrepXpert — Student Performance Analytics
-          <span class="project-stack">| SQL, Dashboards, Reporting, EDA</span>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Employee Turnover Analytics</span>
+            <span class="entry-sub">
+              — Predictive Retention Insights · Python, Pandas, Scikit-learn,
+              Jupyter</span
+            >
+          </div>
+          <span class="entry-date">2025</span>
         </div>
         <ul>
           <li>
-            Analyzed student performance data; designed dashboards and KPI reports to track
-            progress, weak areas, and learning trends for data-driven coaching.
+            Conducted <strong>EDA</strong> on <strong>12K</strong> employee
+            records to identify satisfaction, hours, and project load as primary
+            turnover drivers (~16.6% attrition)
+          </li>
+          <li>
+            Clustered leavers into <strong>3 risk personas</strong> and built a
+            <strong>Gradient Boosting</strong> attrition model
+            (<strong>(AUC 0.979, 91.7% recall)</strong>
+          </li>
+          <li>
+            Converted predictions into risk zones
+            <strong>(Safe / Low / Medium / High)</strong> to help HR prioritize
+            retention for high-probability exit candidates
           </li>
         </ul>
       </div>
 
-      <div class="project">
-        <div class="project-head">
-          JobGPT — Job Market Analytics &amp; Application Tracking
-          <span class="project-stack">| Python, SQL, Dashboards, KPI Reporting</span>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">PrepXpert</span>
+            <span class="entry-sub">
+              — Education Analytics Platform · SQL, PostgreSQL, Chart.js,
+              Dashboards</span
+            >
+          </div>
+          <span class="entry-date">2025 – Present</span>
         </div>
         <ul>
           <li>
-            Analyzed job market datasets and built KPI dashboards for application tracking,
-            pipeline status, and candidate–role match scoring.
+            Designed a <strong>PostgreSQL</strong> data model capturing question
+            attempts, accuracy, study time, mock-exam results, and course
+            progress for NUST NET and MDCAT learners
           </li>
-        </ul>
-      </div>
-
-      <div class="project">
-        <div class="project-head">
-          InsightFlow AI — Executive Report Analytics
-          <span class="project-stack">| Data Visualization, KPI Reporting</span>
-        </div>
-        <ul>
           <li>
-            Turned business report data into prioritized insights, scorecards, and
-            leadership alerts supporting root cause analysis and documentation.
+            Built analytics dashboards to visualize accuracy trends, study
+            activity, subject performance, and exam readiness from student
+            performance data
+          </li>
+          <li>
+            Created data-driven workflows that surface weak areas, error
+            patterns, and revision priorities for personalized practice
+            recommendations
           </li>
         </ul>
       </div>
     </section>
 
     <section>
-      <h2>Certifications</h2>
-      <div class="two-col">
+      <h2 class="serif">Work Experience</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Freelance Data Analytics Developer</span>
+            <span class="entry-sub"> — Independent</span>
+          </div>
+          <span class="entry-date">June 2025 – Present</span>
+        </div>
         <ul>
-          <li>Applied Data Science with Python (Simplilearn)</li>
-          <li>Advanced Statistics for Data Science (Simplilearn)</li>
-          <li>Machine Learning using Python (Simplilearn)</li>
-          <li>Python 101 for Data Science (IBM · Simplilearn)</li>
+          <li>
+            Analyzed learner performance datasets to surface weak subject areas,
+            engagement trends, and progress <strong>KPIs</strong> using
+            <strong>SQL</strong> and <strong>Python</strong>
+          </li>
+          <li>
+            Built dashboards and reports to track data quality, learning
+            outcomes, and usage metrics for decision support
+          </li>
         </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">Freelance Data Reporting Specialist</span>
+            <span class="entry-sub"> — Client Project, Sweden (RE:WEAVE)</span>
+          </div>
+          <span class="entry-date">June 2026</span>
+        </div>
         <ul>
-          <li>AI Engineer — Masters Program (Simplilearn)</li>
-          <li>Generative AI, Prompt Engineering &amp; ChatGPT (Simplilearn)</li>
-          <li>Programming Essentials (Simplilearn)</li>
+          <li>
+            Structured market statistics, forecast figures, and stakeholder
+            reporting sections from client requirements; delivered organized
+            data-driven content in two days
+          </li>
         </ul>
       </div>
     </section>
 
     <section>
-      <h2>Achievements</h2>
-      <ul class="achievements">
-        <li>Gold Medalist — BS Computer Science, FAST NUCES Islamabad</li>
-        <li>Gold Medalist — IGCSE North Region (9A*) · Silver Medalist — A Levels</li>
-      </ul>
+      <h2 class="serif">Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <div>
+            <span class="entry-title">BS Computer Science</span>
+            <span class="entry-sub">
+              — FAST NUCES Islamabad · Robotics Specialization</span
+            >
+          </div>
+          <span class="entry-date">Graduate</span>
+        </div>
+        <p class="edu-extra">Gold Medal for Academic Excellence</p>
+      </div>
     </section>
   </body>
 </html>

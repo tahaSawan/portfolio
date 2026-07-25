@@ -17,7 +17,7 @@ const targets = [
   {
     html: "resume-data-analyst.html",
     pdf: "resume-data-analyst.pdf",
-    margin: { top: "0.38in", right: "0.48in", bottom: "0.38in", left: "0.48in" },
+    margin: { top: "0in", right: "0in", bottom: "0in", left: "0in" },
   },
 ];
 
@@ -45,6 +45,7 @@ try {
       path: outPath,
       format: "Letter",
       printBackground: true,
+      preferCSSPageSize: true,
       margin: target.margin,
     });
     await page.close();
